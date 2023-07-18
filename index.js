@@ -23,9 +23,7 @@ const io = require("socket.io")(server, {
 	}
 });
 
-app.use(cors({
-  "Access-Control-Allow-Origin": "*"
-}));
+app.use(cors(origin = '*'));
 
 
 app.use(cookieParser());
@@ -47,6 +45,7 @@ const PORT = process.env.PORT || 8082;
 
 server.listen(PORT, () => {
   cors:true
+  METHODS:['POST' ,'PATCH','GET','DELETE']
   connect();
   console.log("connnected");
   })
