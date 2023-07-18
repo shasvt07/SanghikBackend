@@ -23,7 +23,9 @@ const io = require("socket.io")(server, {
 	}
 });
 
-app.use(cors());
+app.use(cors({
+  "Access-Control-Allow-Origin": "*"
+}));
 
 
 app.use(cookieParser());
@@ -51,6 +53,7 @@ server.listen(PORT, () => {
 
 
 app.use((err , req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
     const status = err.status || 500;
     const message = err.message || "Something went wrong";
     return res.status(status).json({
