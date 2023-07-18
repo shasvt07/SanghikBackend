@@ -23,7 +23,7 @@ const io = require("socket.io")(server, {
 	}
 });
 
-app.use(cors(origin = '*'));
+app.use(cors({origin : '*'}));
 
 
 app.use(cookieParser());
