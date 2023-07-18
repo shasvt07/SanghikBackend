@@ -23,7 +23,13 @@ const io = require("socket.io")(server, {
 	}
 });
 
-app.use(cors({origin : '*'}));
+app.use(cors({
+  origin: '*',
+  methods: ['GET,HEAD,PUT,PATCH,POST,DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  maxAge: 600
+}));
+
 
 
 app.use(cookieParser());
