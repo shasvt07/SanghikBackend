@@ -18,26 +18,19 @@ const app = require("express")();
 const server =require("http").createServer(app);
 const io = require("socket.io")(server, {
 	cors: {
-		origin: "*",
-		methods: [ "GET", "POST" ]
+		methods: [ "GET","POST","PATCH","DELETE"]
 	}
 });
 
-app.use(cors({
-  origin: '*',
-  methods: ['GET,HEAD,PUT,PATCH,POST,DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  maxAge: 600
-}));
-
-
-
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors());
+
 app.use("/api/auth",authRoutes);
 app.use("/api/posts",postsRoutes);
 app.use("/api/comments",commentsRoutes);
 app.use("/api/user",userRoutes);
+
 
 
 const connect = () =>{
@@ -51,14 +44,12 @@ const PORT = process.env.PORT || 8082;
 
 server.listen(PORT, () => {
   cors:true
-  METHODS:['POST' ,'PATCH','GET','DELETE']
   connect();
   console.log("connnected");
   })
 
 
 app.use((err , req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
     const status = err.status || 500;
     const message = err.message || "Something went wrong";
     return res.status(status).json({
