@@ -14,6 +14,7 @@ mongoose.set("strictQuery", false);
 dotenv.config();
 
 const app = require("express")();
+app.use(cors());
 
 const server =require("http").createServer(app);
 const io = require("socket.io")(server, {
@@ -24,7 +25,6 @@ const io = require("socket.io")(server, {
 
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors());
 
 app.use("/api/auth",authRoutes);
 app.use("/api/posts",postsRoutes);
